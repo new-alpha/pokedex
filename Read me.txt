@@ -17,3 +17,7 @@ that works well in most cases.
   3. pip install django == 2.0.5
   4. pip install requests
   5. pip install json
+  
+#In views.py , a function named query_pokeapi is used to consume json data from the api source using by requesting the api
+for data using requests.get(url) and then loading it in json. The view named pokeview is used to call the function query_pokeapi
+and pass parameter to it . The argument to be passed comes from the form using get method. Then we convert json string into native python object and render the data to the template 'pokedex.html'

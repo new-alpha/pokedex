@@ -4,7 +4,14 @@
   <h1>Pokedex</h1>
   <form method="get">
     <input type="text" name="pokename">
-    <button type="submit">search for pokemon</button>
+    <button type="submit">Search from the pokedex</button>
   </form>
+  {% if pokemon %}
+  <p>pokemon name :<strong>{{ pokemon }}</strong>, it is <strong>{{ description }}</strong></p>
+  <p>Click on this link to see image from the pokemon games: {{ sprite }}</p>
 
+  {% else %}
+  <p> no data found! <p>
+    {% endif %}
+ 
 {% endblock %}

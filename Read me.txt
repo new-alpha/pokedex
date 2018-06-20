@@ -1,0 +1,19 @@
+#This is a django application for fetching data from the restAPI 'pokeapi'.
+
+#This app can be used to fetch basic info about a pokemon such as it's name, description and image
+by entering the name of the pokemon in the input field on the homepage and submit.
+
+#Pokeapi have wrappers for different languages including a wrapper for 'python with auto caching'
+that can be easily used to consume data from the api by just importing a library. I however took
+a different approach. 
+
+#I used the standard method for comsuming data from any RESTAPI,
+that works well in most cases.
+
+#For this to work,
+
+  1. Create a virtual environment using conda distribution
+  2. conda install python == 3.6.4
+  3. pip install django == 2.0.5
+  4. pip install requests
+  5. pip install json

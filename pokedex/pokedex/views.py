@@ -1,29 +1,38 @@
-from django.core import serializers
-from django.http import HttpResponse
+from django.shortcuts import render
 import requests
 import json
 
 BASE_URL = 'http://pokeapi.co'
-
 def query_pokeapi(resource_uri):
-    url = '{0}{1}'.format(BASE_URL, resource_uri)
+    url = '{0}{1}'.format(resource_uri)
     response = requests.get(url)
 
     if response.status_code == 200:
         return json.loads(response.text)
-    return None
+    else:
+        return None
 
 
 def pokeview(request):
 
     if 'pokename' in request.GET:
-                pokename = request.GET['pokename']
+        pokename = request.GET['pokename']
 
-    pokemon_url = '/api/v1/pokemon/{0}/'.format(pokename)
-    pokemon = query_pokeapi(pokemon_url)
+        pokemon_url = '/api/v1/pokemon/{}/'.format(pokename)
+        pokemon = query_pokeapi(pokemon_url)
 
-    stats = pokemon.object.all()
+        if pokemon:
+            sprite_uri = pokemon['sprites'][0]['resource_uri']
+            description_uri = pokemon['descriptions'][0]['resource_uri']
 
-    info = serializers.serialize('json', stats)
+            sprite = query_pokeapi(sprite_uri)
+            description = query_pokeapi(description_uri)
 
-    return HttpResponse(info, content_type='application/json')
+            return render(request, 'pokeview.html', {
+                'pokemon': pokemon['name'],
+                'description': description['description'],
+                'sprite':BASE_URL + sprite['image']
+                })
+
+        else:
+            return render(request,'pokeview.html',{})        

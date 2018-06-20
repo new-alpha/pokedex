@@ -19,5 +19,5 @@ from .views import pokeview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',pokeview,name='home'),
+    path('',pokeview,name='pokeview'),
 ]
